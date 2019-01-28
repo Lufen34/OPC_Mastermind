@@ -1,6 +1,6 @@
 package main.java;
 
-public enum Mode {
+public enum GameMode {
     Challenger,
     Defense,
     Duel,
