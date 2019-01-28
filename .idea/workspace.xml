@@ -2,26 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aef3460a-eb4e-40e9-93c2-6a18afdeff47" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GameMode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/IGameLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Imode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Program.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Ilogic.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Mastermind.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Mastermind.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Mode.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Research.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/Research.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OPC_Mastermind/main/java/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/OPC_Mastermind/main/java/GameTest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ilogic.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Mastermind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Mastermind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Mode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Research.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Research.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ressources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ressources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main/java/GameTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ressources/config.properties" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,22 +34,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Program.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="25" column="47" lean-forward="true" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+            <state relative-caret-position="150">
+              <caret line="10" column="57" lean-forward="true" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#815#816#0" expanded="true" />
-                <element signature="e#838#839#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="1185">
+              <caret line="79" column="69" selection-start-line="79" selection-start-column="69" selection-end-line="79" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#370#371#0" expanded="true" />
+                <element signature="e#414#415#0" expanded="true" />
+                <element signature="e#3157#3158#0" expanded="true" />
+                <element signature="e#3188#3189#0" expanded="true" />
+                <element signature="e#3238#3239#0" expanded="true" />
+                <element signature="e#3278#3279#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,13 +64,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Research.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="120">
+              <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/GameMode.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -86,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/IGameLogic.java">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -95,16 +92,16 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Imode.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/ressources/config.properties">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+            <state relative-caret-position="30">
+              <caret line="2" column="19" lean-forward="true" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -142,12 +139,13 @@
         <option value="$PROJECT_DIR$/src/main/java/PropertiesReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/main.java" />
         <option value="$PROJECT_DIR$/src/main/java/IGameLogic.java" />
-        <option value="$PROJECT_DIR$/src/main/ressources/config.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/Mastermind.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Program.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Game.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Research.java" />
         <option value="$PROJECT_DIR$/src/main/java/GameMode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Mastermind.java" />
+        <option value="$PROJECT_DIR$/src/main/ressources/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/Research.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Program.java" />
       </list>
     </option>
   </component>
@@ -200,7 +198,7 @@
               <item name="OPC_Mastermind" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="ressources" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OPC_Mastermind" type="b2602c69:ProjectViewProjectNode" />
@@ -304,7 +302,7 @@
     <frame x="0" y="36" width="1920" height="1044" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14354323" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14354323" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -312,8 +310,8 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32929516" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32929516" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32929516" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -384,19 +382,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/ressources/config.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/main/java/GameTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Mastermind.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
+          <folding>
+            <element signature="e#96#97#0" expanded="true" />
+            <element signature="e#124#125#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -408,50 +410,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Mastermind.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Program.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="25" column="47" lean-forward="true" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#815#816#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <caret line="2" column="19" lean-forward="true" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Imode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/IGameLogic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Research.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -459,6 +435,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Research.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Program.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="57" lean-forward="true" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="79" column="69" selection-start-line="79" selection-start-column="69" selection-end-line="79" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+            <element signature="e#3157#3158#0" expanded="true" />
+            <element signature="e#3188#3189#0" expanded="true" />
+            <element signature="e#3238#3239#0" expanded="true" />
+            <element signature="e#3278#3279#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

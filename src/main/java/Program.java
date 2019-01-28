@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class Program {
     private Game game;
+    private boolean run;
 
     /**
-     * Allow the user to choose the game he wants to play.
+     * Allow the user to choose the game he wants to play
      */
-    private void setup()
+    private void init()
     {
         float input = 0.f;
         Scanner sc = new Scanner(System.in).useLocale(Locale.US);
@@ -34,11 +35,22 @@ public class Program {
 
     public Program()
     {
-        setup();
+        try {
+            init();
+            game.init();
+        } catch (NullPointerException e){
+            System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
+        }
+
+        run = true;
     }
 
     public void run()
     {
-
+        while (run != false)
+        {
+            game.update();
+            game.draw();
+        }
     }
 }
