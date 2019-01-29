@@ -8,13 +8,17 @@ import java.util.*;
 
 public abstract class Game implements IGameLogic{
     protected GameMode gamemode;
-    protected String password;
+    protected String password ="";
+    protected String passwordHidden="";
     protected List<String> config;
     protected Map<String, String> properties;
+    protected boolean run;
+
 
     public Game()
     {
         properties = new HashMap<>();
+        run = true;
     }
 
     /**
@@ -95,12 +99,15 @@ public abstract class Game implements IGameLogic{
         switch ((int)input) {
             case 1:
                 System.out.println("You choosed the Challenger game.");
+                gamemode = GameMode.Challenger;
                 break;
             case 2:
                 System.out.println("You choosed the Defense game.");
+                gamemode = GameMode.Defense;
                 break;
             case 3:
                 System.out.println("You choosed the Duel game.");
+                gamemode = GameMode.Duel;
                 break;
         }
     }
@@ -111,5 +118,9 @@ public abstract class Game implements IGameLogic{
 
     public void setGamemode(GameMode gamemode) {
         this.gamemode = gamemode;
+    }
+
+    public boolean isRunning() {
+        return run;
     }
 }

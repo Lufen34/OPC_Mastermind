@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Program {
     private Game game;
-    private boolean run;
 
     /**
      * Allow the user to choose the game he wants to play
@@ -41,13 +40,11 @@ public class Program {
         } catch (NullPointerException e){
             System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
         }
-
-        run = true;
     }
 
     public void run()
     {
-        while (run != false)
+        while (game.isRunning())
         {
             game.update();
             game.draw();
