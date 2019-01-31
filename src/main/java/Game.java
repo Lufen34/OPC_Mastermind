@@ -10,9 +10,11 @@ public abstract class Game implements IGameLogic{
     protected GameMode gamemode;
     protected String password ="";
     protected String passwordHidden="";
+    protected String passwordGuesser="";
     protected List<String> config;
     protected Map<String, String> properties;
     protected boolean run;
+    protected int user
 
 
     public Game()

@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Research extends Game {
+    private String input ="";
 
     /**
      * Call the Game Initializer and load the properties file
@@ -17,7 +18,6 @@ public class Research extends Game {
             passwordGenerator();
             hidePassword();
         }
-        ChallengerLogicDraw();
     }
 
     /**
@@ -29,6 +29,31 @@ public class Research extends Game {
         switch (gamemode)
         {
             case Challenger:
+                if (input.equals(password))
+                {
+                    Scanner sc = new Scanner(System.in);
+                    float in;
+                    System.out.println("You won the game !\n");
+                    System.out.println("Do you want to play again ?\n" +
+                            "1. Yes\n"+
+                            "2. No");
+                    in = sc.nextFloat();
+                    while (in >= 3 || in <= 0)
+                    {
+                        System.out.println("Choose between 1 or 2.");
+                        in = sc.nextFloat();
+                    }
+                    switch ((int)in)
+                    {
+                        case 1:
+                            init();
+                            break;
+                        case 2:
+                            run = false;
+                            break;
+                    }
+                }
+
 
                 break;
             case Defense:
@@ -43,15 +68,17 @@ public class Research extends Game {
      */
     @Override
     public void draw() {
-        switch (gamemode)
-        {
-            case Challenger:
-                ChallengerLogicDraw();
-                break;
-            case Defense:
-                break;
-            case Duel:
-                break;
+        if(run == true) {
+            switch (gamemode)
+            {
+                case Challenger:
+                    ChallengerLogicDraw();
+                    break;
+                case Defense:
+                    break;
+                case Duel:
+                    break;
+            }
         }
     }
 
@@ -63,11 +90,12 @@ public class Research extends Game {
             System.out.println("(Combinaison secrète : " + passwordHidden + ')');
         System.out.print("Proposition : " );
         Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
-        System.out.println();
+        input = sc.nextLine();  // Need un string pas un int
+        guessPassword(input);
+        System.out.println("Réponse : " + passwordGuesser);
     }
 
-    /**ChallengerLogicDraw();
+    /**
      * Generate a password depending the amount of of combinations allowed from the config file.
      */
     private void passwordGenerator()
@@ -77,7 +105,7 @@ public class Research extends Game {
         for (int i = 0; i < Integer.parseInt(properties.get("combinations")); i++) {
             int random = ThreadLocalRandom.current().nextInt(0, 9 + 1);
             psw[i] = String.valueOf(random).toCharArray()[0];
-            System.out.println(psw[i]);
+            //System.out.println(psw[i]);
         }
         password = new String(psw);
         passwordHidden = new String(psw);
@@ -94,5 +122,23 @@ public class Research extends Game {
             psw[i] = '*';
         }
         passwordHidden = new String(psw);
+    }
+
+    /**
+     * Tell the user if his input was lower, upper or equals to the answer
+     * @param inputUser The user input
+     */
+    private void guessPassword(String inputUser)
+    {
+        char[] guess = new char[password.length()];
+        for (int i = 0; i < password.length(); i++) {
+            if(inputUser.toCharArray()[i] == password.toCharArray()[i])
+                guess[i] = '=';
+            else if (inputUser.toCharArray()[i] < password.toCharArray()[i]) //Work with ascii table
+                guess[i] = '+';
+            else if (inputUser.toCharArray()[i] > password.toCharArray()[i])
+                guess[i] = '-';
+        }
+        passwordGuesser = new String(guess);
     }
 }
