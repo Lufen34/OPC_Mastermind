@@ -14,7 +14,7 @@ public abstract class Game implements IGameLogic{
     protected List<String> config;
     protected Map<String, String> properties;
     protected boolean run;
-    protected int user
+    protected int turn;
 
 
     public Game()

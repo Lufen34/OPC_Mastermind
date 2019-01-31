@@ -29,32 +29,17 @@ public class Research extends Game {
         switch (gamemode)
         {
             case Challenger:
+                turn++;
                 if (input.equals(password))
                 {
-                    Scanner sc = new Scanner(System.in);
-                    float in;
-                    System.out.println("You won the game !\n");
-                    System.out.println("Do you want to play again ?\n" +
-                            "1. Yes\n"+
-                            "2. No");
-                    in = sc.nextFloat();
-                    while (in >= 3 || in <= 0)
-                    {
-                        System.out.println("Choose between 1 or 2.");
-                        in = sc.nextFloat();
-                    }
-                    switch ((int)in)
-                    {
-                        case 1:
-                            init();
-                            break;
-                        case 2:
-                            run = false;
-                            break;
-                    }
+                    System.out.println("You won the game !");
+                    AskRetry();
                 }
-
-
+                if (turn >= Integer.parseInt(properties.get("numberOfAttempts")))
+                {
+                    System.out.println("You lost the game !");
+                    AskRetry();
+                }
                 break;
             case Defense:
                 break;
@@ -140,5 +125,29 @@ public class Research extends Game {
                 guess[i] = '-';
         }
         passwordGuesser = new String(guess);
+    }
+
+    private void AskRetry()
+    {
+        Scanner sc = new Scanner(System.in);
+        float in;
+        System.out.println("Do you want to play again ?\n" +
+                "1. Yes\n"+
+                "2. No");
+        in = sc.nextFloat();
+        while (in >= 3 || in <= 0)
+        {
+            System.out.println("Choose between 1 or 2.");
+            in = sc.nextFloat();
+        }
+        switch ((int)in)
+        {
+            case 1:
+                init();
+                break;
+            case 2:
+                run = false;
+                break;
+        }
     }
 }
