@@ -15,6 +15,7 @@ public abstract class Game implements IGameLogic{
     protected Map<String, String> properties;
     protected boolean run;
     protected int turn;
+    protected ArtificialIntelligence bot;
 
 
     public Game()
@@ -87,6 +88,7 @@ public abstract class Game implements IGameLogic{
      */
     @Override
     public void init() {
+        // Exception Char / string
         float input = 0.f;
         Scanner sc = new Scanner(System.in).useLocale(Locale.US);
         System.out.println("Please select a mode :");
@@ -112,6 +114,10 @@ public abstract class Game implements IGameLogic{
                 gamemode = GameMode.Duel;
                 break;
         }
+        password = "";
+        passwordHidden = "";
+        passwordGuesser = "";
+        turn = -1;
     }
 
     public GameMode getGamemode() {

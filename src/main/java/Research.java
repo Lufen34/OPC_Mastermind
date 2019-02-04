@@ -13,11 +13,24 @@ public class Research extends Game {
     public void init() {
         super.init();
         getConfig("src/main/resources/config.properties");
-        if(gamemode == GameMode.Challenger)
+        switch(gamemode)
         {
-            passwordGenerator();
-            hidePassword();
+            case Challenger:
+                passwordGenerator();
+                hidePassword();
+                break;
+            case Defense:
+                Scanner sc = new Scanner(System.in);
+                System.out.print("Please select the password :");
+                String input = sc.nextLine();
+                password = input;
+                hidePassword();
+                bot = new ArtificialIntelligence(properties.get("numberOfAttempts"), properties.get("combinations"));
+                break;
+            case Duel:
+                break;
         }
+
     }
 
     /**
@@ -42,6 +55,12 @@ public class Research extends Game {
                 }
                 break;
             case Defense:
+                turn++;
+                if (turn >= Integer.parseInt(properties.get("numberOfAttempts")))
+                {
+                    System.out.println("You lost the game !");
+                    AskRetry();
+                }
                 break;
             case Duel:
                 break;
@@ -57,27 +76,29 @@ public class Research extends Game {
             switch (gamemode)
             {
                 case Challenger:
-                    ChallengerLogicDraw();
+                    if(properties.get("DevMode").contains("true"))
+                        System.out.println("(Secret combination: " + password + ')');
+                    else
+                        System.out.println("(Secret combination : " + passwordHidden + ')');
+                    System.out.print("Proposal : " );
+                    Scanner sc = new Scanner(System.in);
+                    input = sc.nextLine();  // Need un string pas un int
+                    guessPasswordInfo(input);
+                    System.out.println("Answer : " + passwordGuesser);
                     break;
                 case Defense:
+                    if(properties.get("DevMode").contains("true"))
+                        System.out.println("(Secret combination: " + password + ')');
+                    else
+                        System.out.println("(Secret combination : " + passwordHidden + ')');
+                    System.out.println("Proposal : " + bot.passwordGenerator());
+                    guessPasswordInfo(bot.passwordGenerator());
+                    bot.getInformation(passwordGuesser);
                     break;
                 case Duel:
                     break;
             }
         }
-    }
-
-    public void ChallengerLogicDraw()
-    {
-        if(properties.get("DevMode").contains("true"))
-            System.out.println("(Combinaison secrète : " + password + ')');
-        else
-            System.out.println("(Combinaison secrète : " + passwordHidden + ')');
-        System.out.print("Proposition : " );
-        Scanner sc = new Scanner(System.in);
-        input = sc.nextLine();  // Need un string pas un int
-        guessPassword(input);
-        System.out.println("Réponse : " + passwordGuesser);
     }
 
     /**
@@ -113,7 +134,7 @@ public class Research extends Game {
      * Tell the user if his input was lower, upper or equals to the answer
      * @param inputUser The user input
      */
-    private void guessPassword(String inputUser)
+    private void guessPasswordInfo(String inputUser)
     {
         char[] guess = new char[password.length()];
         for (int i = 0; i < password.length(); i++) {
@@ -127,6 +148,9 @@ public class Research extends Game {
         passwordGuesser = new String(guess);
     }
 
+    /**
+     * Ask the user if he want's to continue playing or not
+     */
     private void AskRetry()
     {
         Scanner sc = new Scanner(System.in);
