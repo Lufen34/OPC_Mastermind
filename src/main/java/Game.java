@@ -16,6 +16,10 @@ public abstract class Game implements IGameLogic{
     protected boolean run;
     protected int turn;
     protected ArtificialIntelligence bot;
+    protected String input = "";
+    protected String passwordAI = "";
+    protected String inputAI = "";
+    protected String passwordGuesserAI = "";
 
 
     public Game()
@@ -117,7 +121,9 @@ public abstract class Game implements IGameLogic{
         password = "";
         passwordHidden = "";
         passwordGuesser = "";
-        turn = -1;
+        passwordAI = "";
+        passwordGuesserAI = "";
+        turn = 1;
     }
 
     public GameMode getGamemode() {

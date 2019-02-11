@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Research extends Game {
-    private String input ="";
 
     /**
      * Call the Game Initializer and load the properties file
@@ -28,6 +27,14 @@ public class Research extends Game {
                 bot = new ArtificialIntelligence(properties.get("numberOfAttempts"), properties.get("combinations"));
                 break;
             case Duel:
+                passwordGenerator();
+                hidePassword();
+                sc = new Scanner(System.in);
+                System.out.print("Please select the password :");
+                input = sc.nextLine();
+                password = input;
+                hidePassword();
+                bot = new ArtificialIntelligence(properties.get("numberOfAttempts"), properties.get("combinations"));
                 break;
         }
 
@@ -42,8 +49,7 @@ public class Research extends Game {
         switch (gamemode)
         {
             case Challenger:
-                turn++;
-                if (input.equals(password))
+                if (input.equals(passwordAI))
                 {
                     System.out.println("You won the game !");
                     AskRetry();
@@ -55,10 +61,14 @@ public class Research extends Game {
                 }
                 break;
             case Defense:
-                turn++;
-                if (turn >= Integer.parseInt(properties.get("numberOfAttempts")))
+                if (inputAI.equals(password))
                 {
                     System.out.println("You lost the game !");
+                    AskRetry();
+                }
+                if (turn >= Integer.parseInt(properties.get("numberOfAttempts")) + 1)
+                {
+                    System.out.println("You Win the game !");
                     AskRetry();
                 }
                 break;
@@ -77,13 +87,13 @@ public class Research extends Game {
             {
                 case Challenger:
                     if(properties.get("DevMode").contains("true"))
-                        System.out.println("(Secret combination: " + password + ')');
+                        System.out.println("(Secret combination: " + passwordAI + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Proposal : " );
                     Scanner sc = new Scanner(System.in);
-                    input = sc.nextLine();  // Need un string pas un int
-                    guessPasswordInfo(input);
+                    input = sc.nextLine();  // int error
+                    passwordGuesser = guessPasswordInfo(input);
                     System.out.println("Answer : " + passwordGuesser);
                     break;
                 case Defense:
@@ -91,13 +101,34 @@ public class Research extends Game {
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
-                    System.out.println("Proposal : " + bot.passwordGenerator());
-                    guessPasswordInfo(bot.passwordGenerator());
-                    bot.getInformation(passwordGuesser);
+                    inputAI = bot.passwordGenerator(turn);
+                    System.out.println("Proposal : " + inputAI);
+                    passwordGuesserAI = guessPasswordInfo(inputAI);
+                    System.out.println("Answer : " + passwordGuesserAI);
+                    bot.getInformation(passwordGuesserAI);
                     break;
                 case Duel:
+                    if(properties.get("DevMode").contains("true"))
+                        System.out.println("(Secret combination: " + passwordAI + ')');
+                    else
+                        System.out.println("(Secret combination : " + passwordHidden + ')');
+                    System.out.print("Player Proposal : " );
+                    sc = new Scanner(System.in);
+                    input = sc.nextLine(); // Int error
+                    passwordGuesser = guessPasswordInfo(input);
+                    System.out.println("Answer : " + passwordGuesser);
+                    if(properties.get("DevMode").contains("true"))
+                        System.out.println("(Secret combination: " + password + ')');
+                    else
+                        System.out.println("(Secret combination : " + passwordHidden + ')');
+                    inputAI = bot.passwordGenerator(turn);
+                    System.out.println("AI Proposal : " + inputAI);
+                    passwordGuesserAI = guessPasswordInfo(inputAI);
+                    System.out.println("Answer : " + passwordGuesserAI);
+                    bot.getInformation(passwordGuesserAI);
                     break;
             }
+            turn++;
         }
     }
 
@@ -113,9 +144,8 @@ public class Research extends Game {
             psw[i] = String.valueOf(random).toCharArray()[0];
             //System.out.println(psw[i]);
         }
-        password = new String(psw);
+        passwordAI = new String(psw);
         passwordHidden = new String(psw);
-        //System.out.println("psw :"+ password);
     }
 
     /**
@@ -133,19 +163,20 @@ public class Research extends Game {
     /**
      * Tell the user if his input was lower, upper or equals to the answer
      * @param inputUser The user input
+     * @return the information of the input from the user or the AI
      */
-    private void guessPasswordInfo(String inputUser)
+    private String guessPasswordInfo(String inputUser)
     {
-        char[] guess = new char[password.length()];
-        for (int i = 0; i < password.length(); i++) {
-            if(inputUser.toCharArray()[i] == password.toCharArray()[i])
+        char[] guess = new char[passwordAI.length()];
+        for (int i = 0; i < passwordAI.length(); i++) {
+            if(inputUser.toCharArray()[i] == passwordAI.toCharArray()[i])
                 guess[i] = '=';
-            else if (inputUser.toCharArray()[i] < password.toCharArray()[i]) //Work with ascii table
+            else if (inputUser.toCharArray()[i] < passwordAI.toCharArray()[i]) //Work with ascii table
                 guess[i] = '+';
-            else if (inputUser.toCharArray()[i] > password.toCharArray()[i])
+            else if (inputUser.toCharArray()[i] > passwordAI.toCharArray()[i])
                 guess[i] = '-';
         }
-        passwordGuesser = new String(guess);
+        return new String(guess);
     }
 
     /**
