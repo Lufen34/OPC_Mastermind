@@ -54,7 +54,7 @@ public class Research extends Game {
                     System.out.println("You won the game !");
                     AskRetry();
                 }
-                if (turn >= Integer.parseInt(properties.get("numberOfAttempts")))
+                if (turn >= Integer.parseInt(properties.get("numberOfAttempts"))+ 1)
                 {
                     System.out.println("You lost the game !");
                     AskRetry();
@@ -66,13 +66,33 @@ public class Research extends Game {
                     System.out.println("You lost the game !");
                     AskRetry();
                 }
-                if (turn >= Integer.parseInt(properties.get("numberOfAttempts")) + 1)
+                if (turn >= Integer.parseInt(properties.get("numberOfAttempts"))+ 1)
                 {
                     System.out.println("You Win the game !");
                     AskRetry();
                 }
                 break;
             case Duel:
+                if (input.equals(passwordAI) && inputAI.equals(password))
+                {
+                    System.out.println("This is a Draw !");
+                    AskRetry();
+                }
+                else if (input.equals(passwordAI))
+                {
+                    System.out.println("You won the game !");
+                    AskRetry();
+                }
+                else if (inputAI.equals(password))
+                {
+                    System.out.println("You lost the game !");
+                    AskRetry();
+                }
+                else if (turn >= Integer.parseInt(properties.get("numberOfAttempts"))+ 1)
+                {
+                    System.out.println("No one win the game !");
+                    AskRetry();
+                }
                 break;
         }
     }
@@ -93,7 +113,7 @@ public class Research extends Game {
                     System.out.print("Proposal : " );
                     Scanner sc = new Scanner(System.in);
                     input = sc.nextLine();  // int error
-                    passwordGuesser = guessPasswordInfo(input);
+                    passwordGuesser = guessPasswordInfo(input, false);
                     System.out.println("Answer : " + passwordGuesser);
                     break;
                 case Defense:
@@ -103,7 +123,7 @@ public class Research extends Game {
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     inputAI = bot.passwordGenerator(turn);
                     System.out.println("Proposal : " + inputAI);
-                    passwordGuesserAI = guessPasswordInfo(inputAI);
+                    passwordGuesserAI = guessPasswordInfo(inputAI, false);
                     System.out.println("a : " + passwordGuesserAI);
                     System.out.println("Answer : " + passwordGuesserAI);
                     bot.getInformation(passwordGuesserAI);
@@ -116,7 +136,7 @@ public class Research extends Game {
                     System.out.print("Player Proposal : " );
                     sc = new Scanner(System.in);
                     input = sc.nextLine(); // Int error
-                    passwordGuesser = guessPasswordInfo(input);
+                    passwordGuesser = guessPasswordInfo(input, true);
                     System.out.println("Answer : " + passwordGuesser);
                     if(properties.get("DevMode").contains("true"))
                         System.out.println("(Secret combination: " + password + ')');
@@ -124,7 +144,7 @@ public class Research extends Game {
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     inputAI = bot.passwordGenerator(turn);
                     System.out.println("AI Proposal : " + inputAI);
-                    passwordGuesserAI = guessPasswordInfo(inputAI);
+                    passwordGuesserAI = guessPasswordInfo(inputAI, false);
                     System.out.println("Answer : " + passwordGuesserAI);
                     bot.getInformation(passwordGuesserAI);
                     break;
@@ -166,7 +186,7 @@ public class Research extends Game {
      * @param inputUser The user input
      * @return the information of the input from the user or the AI
      */
-    private String guessPasswordInfo(String inputUser)
+    private String guessPasswordInfo(String inputUser, boolean IsHumanPlayer)
     {
         char[] guess = null;
 
@@ -195,6 +215,28 @@ public class Research extends Game {
                 }
                 break;
             case Duel:
+                    if(IsHumanPlayer){
+                        guess = new char[passwordAI.length()];
+                        for (int i = 0; i < passwordAI.length(); i++) {
+                            if(inputUser.toCharArray()[i] == passwordAI.toCharArray()[i])
+                                guess[i] = '=';
+                            else if (inputUser.toCharArray()[i] < passwordAI.toCharArray()[i]) //Work with ascii table
+                                guess[i] = '+';
+                            else if (inputUser.toCharArray()[i] > passwordAI.toCharArray()[i])
+                                guess[i] = '-';
+                        }
+                    }
+                    else{
+                        guess = new char[password.length()];
+                        for (int i = 0; i < password.length(); i++) {
+                            if(inputUser.toCharArray()[i] == password.toCharArray()[i])
+                                guess[i] = '=';
+                            else if (inputUser.toCharArray()[i] < password.toCharArray()[i]) //Work with ascii table
+                                guess[i] = '+';
+                            else if (inputUser.toCharArray()[i] > password.toCharArray()[i])
+                                guess[i] = '-';
+                        }
+                    }
                 break;
         }
         return new String(guess);
