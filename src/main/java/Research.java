@@ -122,9 +122,8 @@ public class Research extends Game {
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     inputAI = bot.passwordGenerator(turn);
-                    System.out.println("Proposal : " + inputAI);
+                    System.out.println("AI Proposal : " + inputAI);
                     passwordGuesserAI = guessPasswordInfo(inputAI, false);
-                    System.out.println("a : " + passwordGuesserAI);
                     System.out.println("Answer : " + passwordGuesserAI);
                     bot.getInformation(passwordGuesserAI);
                     break;
@@ -174,8 +173,8 @@ public class Research extends Game {
      */
     private void hidePassword()
     {
-        char[] psw = password.toCharArray();
-        for (int i = 0; i < password.length(); i++) {
+        char[] psw = passwordAI.toCharArray();
+        for (int i = 0; i < passwordAI.length(); i++) {
             psw[i] = '*';
         }
         passwordHidden = new String(psw);
