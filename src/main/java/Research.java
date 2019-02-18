@@ -104,6 +104,7 @@ public class Research extends Game {
                     inputAI = bot.passwordGenerator(turn);
                     System.out.println("Proposal : " + inputAI);
                     passwordGuesserAI = guessPasswordInfo(inputAI);
+                    System.out.println("a : " + passwordGuesserAI);
                     System.out.println("Answer : " + passwordGuesserAI);
                     bot.getInformation(passwordGuesserAI);
                     break;
@@ -167,14 +168,34 @@ public class Research extends Game {
      */
     private String guessPasswordInfo(String inputUser)
     {
-        char[] guess = new char[passwordAI.length()];
-        for (int i = 0; i < passwordAI.length(); i++) {
-            if(inputUser.toCharArray()[i] == passwordAI.toCharArray()[i])
-                guess[i] = '=';
-            else if (inputUser.toCharArray()[i] < passwordAI.toCharArray()[i]) //Work with ascii table
-                guess[i] = '+';
-            else if (inputUser.toCharArray()[i] > passwordAI.toCharArray()[i])
-                guess[i] = '-';
+        char[] guess = null;
+
+        switch (gamemode)
+        {
+            case Challenger:
+                guess = new char[passwordAI.length()];
+                for (int i = 0; i < passwordAI.length(); i++) {
+                    if(inputUser.toCharArray()[i] == passwordAI.toCharArray()[i])
+                        guess[i] = '=';
+                    else if (inputUser.toCharArray()[i] < passwordAI.toCharArray()[i]) //Work with ascii table
+                        guess[i] = '+';
+                    else if (inputUser.toCharArray()[i] > passwordAI.toCharArray()[i])
+                        guess[i] = '-';
+                }
+                break;
+            case Defense:
+                guess = new char[password.length()];
+                for (int i = 0; i < password.length(); i++) {
+                    if(inputUser.toCharArray()[i] == password.toCharArray()[i])
+                        guess[i] = '=';
+                    else if (inputUser.toCharArray()[i] < password.toCharArray()[i]) //Work with ascii table
+                        guess[i] = '+';
+                    else if (inputUser.toCharArray()[i] > password.toCharArray()[i])
+                        guess[i] = '-';
+                }
+                break;
+            case Duel:
+                break;
         }
         return new String(guess);
     }

@@ -11,7 +11,6 @@ public class ArtificialIntelligence {
     private int[] min;
     private char[] memoryInfo;
     private String guess;
-    private boolean guessed;
 
     public ArtificialIntelligence(String numberOfAttempts, String numberOfCombinations)
     {
@@ -20,7 +19,6 @@ public class ArtificialIntelligence {
         min = new int[this.numberOfCombinations];
         max = new int[this.numberOfCombinations];
         memoryInfo = new char[this.numberOfCombinations];
-        guessed = false;
     }
 
     public void getInformation(String passwordInfo)
@@ -79,7 +77,6 @@ public class ArtificialIntelligence {
             }
         }
         guess = new String(psw);
-        guessed = true;
         return guess;
     }
 
