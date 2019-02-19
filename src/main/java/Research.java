@@ -247,15 +247,19 @@ public class Research extends Game {
     private void AskRetry()
     {
         Scanner sc = new Scanner(System.in);
-        float in;
+        float in = 0.f;
         System.out.println("Do you want to play again ?\n" +
                 "1. Yes\n"+
                 "2. No");
-        in = sc.nextFloat();
         while (in >= 3 || in <= 0)
         {
             System.out.println("Choose between 1 or 2.");
-            in = sc.nextFloat();
+            try{
+                in = Float.parseFloat(sc.nextLine());
+            }catch (Exception e)
+            {
+                System.err.println("Please enter a Integer.");
+            }
         }
         switch ((int)in)
         {

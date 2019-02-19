@@ -102,7 +102,12 @@ public abstract class Game implements IGameLogic{
         while (input >= 4 || input <= 0)
         {
             System.out.println("Choose between 1, 2 or 3.");
-            input = sc.nextFloat();
+            try{
+                input = Float.parseFloat(sc.nextLine());
+            }catch (Exception e)
+            {
+                System.err.println("Please enter a Integer.");
+            }
         }
         switch ((int)input) {
             case 1:

@@ -1,5 +1,6 @@
 package main.java;
 
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -19,8 +20,14 @@ public class Program {
                 "2. Mastermind");
         while (input >= 3 || input <= 0)
         {
+            input = 0.f;
             System.out.println("Choose between 1 or 2.");
-            input = sc.nextFloat();
+            try{
+                input = Float.parseFloat(sc.nextLine());
+            }catch (Exception e)
+            {
+                System.err.println("Please enter a Integer.");
+            }
         }
         switch ((int)input) {
             case 1:
