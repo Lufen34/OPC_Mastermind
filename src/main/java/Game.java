@@ -1,10 +1,15 @@
 package main.java;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 public abstract class Game implements IGameLogic{
     protected GameMode gamemode;
@@ -20,6 +25,8 @@ public abstract class Game implements IGameLogic{
     protected String passwordAI = "";
     protected String inputAI = "";
     protected String passwordGuesserAI = "";
+    protected int minRange = 0;
+    protected int maxRange = 9;
 
 
     public Game()
@@ -76,13 +83,13 @@ public abstract class Game implements IGameLogic{
                 {
                     String prefix=getPrefix(content, content.indexOf("="));
                     String suffix=getSuffix(content, content.indexOf("="));
-                    //System.out.println("prefix:" + getPrefix(content, content.indexOf("=")));
-                    //System.out.println("Suffix:" + getSuffix(content, content.indexOf("=")));
                     properties.put(prefix, suffix);
                 }
             }
         }catch (IOException e){
-            System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
+            Logger logger = Logger.getLogger(Program.class);
+            BasicConfigurator.configure();
+            logger.info("Test", e);
         }
     }
 
@@ -129,6 +136,65 @@ public abstract class Game implements IGameLogic{
         passwordAI = "";
         passwordGuesserAI = "";
         turn = 1;
+    }
+
+    /**
+     * Generate a password depending the amount of of combinations allowed from the config file.
+     */
+    protected void passwordGenerator()
+    {
+        char[] psw = new char[Integer.parseInt(properties.get("combinations"))];
+
+        for (int i = 0; i < Integer.parseInt(properties.get("combinations")); i++) {
+            int random = ThreadLocalRandom.current().nextInt(minRange, maxRange + 1);
+            psw[i] = String.valueOf(random).toCharArray()[0];
+            //System.out.println(psw[i]);
+        }
+        passwordAI = new String(psw);
+        passwordHidden = new String(psw);
+    }
+
+    /**
+     * Hide the password from the user
+     */
+    protected void hidePassword()
+    {
+        char[] psw = passwordAI.toCharArray();
+        for (int i = 0; i < passwordAI.length(); i++) {
+            psw[i] = '*';
+        }
+        passwordHidden = new String(psw);
+    }
+
+    /**
+     * Ask the user if he want's to continue playing or not
+     */
+    protected void AskRetry()
+    {
+        Scanner sc = new Scanner(System.in);
+        float in = 0.f;
+        System.out.println("Do you want to play again ?\n" +
+                "1. Yes\n"+
+                "2. No");
+        while (in >= 3 || in <= 0)
+        {
+            System.out.println("Choose between 1 or 2.");
+            try{
+                in = Float.parseFloat(sc.nextLine());
+            }catch (Exception e)
+            {
+                System.err.println("Please enter a Integer.");
+            }
+        }
+        switch ((int)in)
+        {
+            case 1:
+                init();
+                break;
+            case 2:
+                run = false;
+                break;
+        }
     }
 
     public GameMode getGamemode() {

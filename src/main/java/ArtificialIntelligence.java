@@ -79,5 +79,4 @@ public class ArtificialIntelligence {
         guess = new String(psw);
         return guess;
     }
-
 }

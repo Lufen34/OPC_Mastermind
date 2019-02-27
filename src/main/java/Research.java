@@ -1,7 +1,6 @@
 package main.java;
 
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Research extends Game {
 
@@ -112,7 +111,7 @@ public class Research extends Game {
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Proposal : " );
                     Scanner sc = new Scanner(System.in);
-                    input = sc.nextLine();  // int error
+                    input = sc.nextLine();  // int error                                                   /!\
                     passwordGuesser = guessPasswordInfo(input, false);
                     System.out.println("Answer : " + passwordGuesser);
                     break;
@@ -134,7 +133,7 @@ public class Research extends Game {
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Player Proposal : " );
                     sc = new Scanner(System.in);
-                    input = sc.nextLine(); // Int error
+                    input = sc.nextLine(); // int error                                                   /!\
                     passwordGuesser = guessPasswordInfo(input, true);
                     System.out.println("Answer : " + passwordGuesser);
                     if(properties.get("DevMode").contains("true"))
@@ -150,34 +149,6 @@ public class Research extends Game {
             }
             turn++;
         }
-    }
-
-    /**
-     * Generate a password depending the amount of of combinations allowed from the config file.
-     */
-    private void passwordGenerator()
-    {
-        char[] psw = new char[Integer.parseInt(properties.get("combinations"))];
-
-        for (int i = 0; i < Integer.parseInt(properties.get("combinations")); i++) {
-            int random = ThreadLocalRandom.current().nextInt(0, 9 + 1);
-            psw[i] = String.valueOf(random).toCharArray()[0];
-            //System.out.println(psw[i]);
-        }
-        passwordAI = new String(psw);
-        passwordHidden = new String(psw);
-    }
-
-    /**
-     * Hide the password from the user
-     */
-    private void hidePassword()
-    {
-        char[] psw = passwordAI.toCharArray();
-        for (int i = 0; i < passwordAI.length(); i++) {
-            psw[i] = '*';
-        }
-        passwordHidden = new String(psw);
     }
 
     /**
@@ -241,34 +212,5 @@ public class Research extends Game {
         return new String(guess);
     }
 
-    /**
-     * Ask the user if he want's to continue playing or not
-     */
-    private void AskRetry()
-    {
-        Scanner sc = new Scanner(System.in);
-        float in = 0.f;
-        System.out.println("Do you want to play again ?\n" +
-                "1. Yes\n"+
-                "2. No");
-        while (in >= 3 || in <= 0)
-        {
-            System.out.println("Choose between 1 or 2.");
-            try{
-                in = Float.parseFloat(sc.nextLine());
-            }catch (Exception e)
-            {
-                System.err.println("Please enter a Integer.");
-            }
-        }
-        switch ((int)in)
-        {
-            case 1:
-                init();
-                break;
-            case 2:
-                run = false;
-                break;
-        }
-    }
+
 }
