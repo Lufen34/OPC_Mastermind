@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class Research extends Game {
 
+    public Research(GamePlayed game) {
+        super(game);
+    }
+
     /**
      * Call the Game Initializer and load the properties file
      */
@@ -23,7 +27,7 @@ public class Research extends Game {
                 String input = sc.nextLine();
                 password = input;
                 hidePassword();
-                bot = new ArtificialIntelligence(properties.get("numberOfAttempts"), properties.get("combinations"));
+                bot = new AIResearch(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
             case Duel:
                 passwordGenerator();
@@ -33,7 +37,7 @@ public class Research extends Game {
                 input = sc.nextLine();
                 password = input;
                 hidePassword();
-                bot = new ArtificialIntelligence(properties.get("numberOfAttempts"), properties.get("combinations"));
+                bot = new AIResearch(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
         }
 
@@ -120,7 +124,7 @@ public class Research extends Game {
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
-                    inputAI = bot.passwordGenerator(turn);
+                    inputAI = bot.passwordGenerator(turn, current);
                     System.out.println("AI Proposal : " + inputAI);
                     passwordGuesserAI = guessPasswordInfo(inputAI, false);
                     System.out.println("Answer : " + passwordGuesserAI);
@@ -140,7 +144,7 @@ public class Research extends Game {
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
-                    inputAI = bot.passwordGenerator(turn);
+                    inputAI = bot.passwordGenerator(turn, current);
                     System.out.println("AI Proposal : " + inputAI);
                     passwordGuesserAI = guessPasswordInfo(inputAI, false);
                     System.out.println("Answer : " + passwordGuesserAI);

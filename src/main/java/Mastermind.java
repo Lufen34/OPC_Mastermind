@@ -3,6 +3,11 @@ package main.java;
 import java.util.Scanner;
 
 public class Mastermind extends Game {
+
+    public Mastermind(GamePlayed game) {
+        super(game);
+    }
+
     @Override
     public void init() {
         super.init();
@@ -21,7 +26,7 @@ public class Mastermind extends Game {
                 String input = sc.nextLine();
                 password = input;
                 hidePassword();
-                bot = new ArtificialIntelligence(properties.get("numberOfAttempts"), properties.get("combinations"));
+                bot = new AIMastermind(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
             case Duel:
                 passwordGenerator();
@@ -31,7 +36,7 @@ public class Mastermind extends Game {
                 input = sc.nextLine();
                 password = input;
                 hidePassword();
-                bot = new ArtificialIntelligence(properties.get("numberOfAttempts"), properties.get("combinations"));
+                bot = new AIMastermind(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
         }
     }
@@ -93,6 +98,14 @@ public class Mastermind extends Game {
                     System.out.println("Answer : " + passwordGuessInfo(input));
                     break;
                 case Defense:
+                    if(properties.get("DevMode").contains("true"))
+                        System.out.println("(Secret combination: " + passwordAI + ')');
+                    else
+                        System.out.println("(Secret combination : " + passwordHidden + ')');
+                    inputAI = bot.passwordGenerator(turn, current);
+                    System.out.println("AI Proposal : " + inputAI);
+                    passwordGuesserAI = passwordGuessInfo(inputAI);
+                    System.out.println("Answer : " + passwordGuesserAI);
                     break;
                 case Duel:
                     break;
@@ -107,29 +120,55 @@ public class Mastermind extends Game {
         int wrongPosition = 0;
         int[] posMemory = new int[Integer.parseInt(properties.get("combinations"))];
         int j = 0;
-        // Detect if the number is correctly placed
-        for (int i = 0; i < input.length(); i++) {
-            if (input.toCharArray()[i] == passwordAI.toCharArray()[i]) {
-                correctPosition++;
-            }
-            else{
-                posMemory[j] = i;
-                j++;
-            }
-        }
-        /* posMemory remember the position of the character which didn't matched
-        *  Here I try to detect if the character from the input X at position Y from posMemory is present inside
-        *  the array. At the end we just need to deduce the difference.
-        **/
-        for (int i = 0; i < posMemory.length; i++) {
-            for (int k = 0; k < input.length(); k++) {
-                if(input.toCharArray()[posMemory[i]] == passwordAI.toCharArray()[k]){
-                    wrongPosition++;
-                    break;
-                }
-            }
-        }
 
-        return wrongPosition - correctPosition + " présent(s), " + correctPosition + " bien placé(s).";
+        switch (gamemode)
+        {
+            case Challenger:
+                // Detect if the number is correctly placed
+                for (int i = 0; i < input.length(); i++) {
+                    if (input.toCharArray()[i] == passwordAI.toCharArray()[i]) {
+                        correctPosition++;
+                    }
+                    else{
+                        posMemory[j] = i;
+                        j++;
+                    }
+                }
+                /* posMemory remember the position of the character which didn't matched
+                 *  Here I try to detect if the character from the input X at position Y from posMemory is present inside
+                 *  the array. At the end we just need to deduce the difference.
+                 **/
+                for (int i = 0; i < posMemory.length; i++) {
+                    for (int k = 0; k < input.length(); k++) {
+                        if(input.toCharArray()[posMemory[i]] == passwordAI.toCharArray()[k]){
+                            wrongPosition++;
+                            break;
+                        }
+                    }
+                }
+                break;
+            case Defense:
+                for (int i = 0; i < input.length(); i++) {
+                    if (input.toCharArray()[i] == password.toCharArray()[i]) {
+                        correctPosition++;
+                    }
+                    else{
+                        posMemory[j] = i;
+                        j++;
+                    }
+                }
+                for (int i = 0; i < posMemory.length; i++) {
+                    for (int k = 0; k < input.length(); k++) {
+                        if(input.toCharArray()[posMemory[i]] == password.toCharArray()[k]){
+                            wrongPosition++;
+                            break;
+                        }
+                    }
+                }
+                break;
+            case Duel:
+                break;
+        }
+        return  ((wrongPosition - correctPosition) < 0) ? "0":wrongPosition - correctPosition + " présent(s), " + correctPosition + " bien placé(s).";
     }
 }

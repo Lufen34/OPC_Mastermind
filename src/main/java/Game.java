@@ -27,12 +27,14 @@ public abstract class Game implements IGameLogic{
     protected String passwordGuesserAI = "";
     protected int minRange = 0;
     protected int maxRange = 9;
+    protected GamePlayed current;
 
 
-    public Game()
+    public Game(GamePlayed game)
     {
         properties = new HashMap<>();
         run = true;
+        this.current = game;
     }
 
     /**

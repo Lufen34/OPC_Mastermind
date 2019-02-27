@@ -32,10 +32,10 @@ public class Program {
         switch ((int)input) {
             case 1:
                 System.out.println("You choosed the Research game.");
-                game = new Research();
+                game = new Research(GamePlayed.Reasearch);
                 break;
             case 2:
-                game = new Mastermind();
+                game = new Mastermind(GamePlayed.Mastermind);
                 break;
         }
     }

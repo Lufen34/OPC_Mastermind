@@ -2,25 +2,9 @@ package main.java;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class ArtificialIntelligence {
-    protected int numberOfAttempts;
-    protected int numberOfCombinations;
-    protected int[] max;
-    protected int[] min;
-    protected char[] memoryInfo;
-    protected String guess;
-    protected char minRange;
-    protected char maxRange;
-
-    public ArtificialIntelligence(String numberOfAttempts, String numberOfCombinations, String numberMin, String numberMax)
-    {
-        this.numberOfCombinations = Integer.parseInt(numberOfCombinations);
-        this.numberOfAttempts = Integer.parseInt(numberOfAttempts);
-        min = new int[this.numberOfCombinations];
-        max = new int[this.numberOfCombinations];
-        memoryInfo = new char[this.numberOfCombinations];
-        minRange = numberMin.toCharArray()[0];
-        maxRange = numberMax.toCharArray()[0];
+public class AIResearch extends ArtificialIntelligence {
+    public AIResearch(String numberOfAttempts, String numberOfCombinations, String numberMin, String numberMax) {
+        super(numberOfAttempts, numberOfCombinations, numberMin, numberMax);
     }
 
     public void getInformation(String passwordInfo)
@@ -49,9 +33,9 @@ public abstract class ArtificialIntelligence {
 
         char[] psw = new char[this.numberOfCombinations];
         if (turn == 1) {
-                for (int j = 0; j < min.length; j++) {
-                    min[j] = '0';
-                    max[j] = '9'; }
+            for (int j = 0; j < min.length; j++) {
+                min[j] = '0';
+                max[j] = '9'; }
         }
         else {
             for (int k = 0; k < min.length; k++) {
