@@ -114,8 +114,7 @@ public class Research extends Game {
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Proposal : " );
-                    Scanner sc = new Scanner(System.in);
-                    input = sc.nextLine();  // int error                                                   /!\
+                    input = inputProtection();
                     passwordGuesser = guessPasswordInfo(input, false);
                     System.out.println("Answer : " + passwordGuesser);
                     break;
@@ -136,8 +135,7 @@ public class Research extends Game {
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Player Proposal : " );
-                    sc = new Scanner(System.in);
-                    input = sc.nextLine(); // int error                                                   /!\
+                    input = inputProtection();
                     passwordGuesser = guessPasswordInfo(input, true);
                     System.out.println("Answer : " + passwordGuesser);
                     if(properties.get("DevMode").contains("true"))

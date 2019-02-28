@@ -199,6 +199,44 @@ public abstract class Game implements IGameLogic{
         }
     }
 
+    /**
+     * Test the input of the user in order to detect if he use no letter and the right amount of digits as configured
+     * in the properties file.
+     * @return
+     */
+
+    private boolean isTheRightAmount(String input)
+    {
+        if (input.length() < Integer.parseInt(properties.get("combinations")) || input.length() > Integer.parseInt(properties.get("combinations")))
+        {
+            System.err.println("Please enter a number with " + Integer.parseInt(properties.get("combinations")) + " digits");
+            return false;
+        }
+        else
+            return true;
+    }
+
+    private boolean isOnlyNumbers(String input)
+    {
+        for (int i = 0; i < input.length(); i++) {
+            if (input.toCharArray()[i] < '0' || input.toCharArray()[i] > '9') {
+                System.err.println("Please enter only integers.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected String inputProtection() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        while (isOnlyNumbers(input) == false || isTheRightAmount(input) == false) {
+            input = sc.nextLine();
+        }
+        return input;
+    }
+
     public GameMode getGamemode() {
         return gamemode;
     }

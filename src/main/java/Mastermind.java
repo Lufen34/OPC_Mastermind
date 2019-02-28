@@ -93,13 +93,12 @@ public class Mastermind extends Game {
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Proposal : " );
-                    Scanner sc = new Scanner(System.in);
-                    input = sc.nextLine();  // int error                                                   /!\
+                    input = inputProtection();
                     System.out.println("Answer : " + passwordGuessInfo(input));
                     break;
                 case Defense:
                     if(properties.get("DevMode").contains("true"))
-                        System.out.println("(Secret combination: " + passwordAI + ')');
+                        System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     inputAI = bot.passwordGenerator(turn, current);
@@ -169,6 +168,6 @@ public class Mastermind extends Game {
             case Duel:
                 break;
         }
-        return  ((wrongPosition - correctPosition) < 0) ? "0":wrongPosition - correctPosition + " présent(s), " + correctPosition + " bien placé(s).";
+        return  ((wrongPosition - correctPosition) < 0) ? "0":wrongPosition - correctPosition + " are present(s), " + correctPosition + " are correctly placed.";
     }
 }
