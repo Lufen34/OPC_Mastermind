@@ -22,9 +22,8 @@ public class Research extends Game {
                 hidePassword();
                 break;
             case Defense:
-                Scanner sc = new Scanner(System.in);
                 System.out.print("Please select the password :");
-                String input = sc.nextLine();
+                input = inputProtection();
                 password = input;
                 hidePassword();
                 bot = new AIResearch(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
@@ -32,9 +31,8 @@ public class Research extends Game {
             case Duel:
                 passwordGenerator();
                 hidePassword();
-                sc = new Scanner(System.in);
                 System.out.print("Please select the password :");
-                input = sc.nextLine();
+                input = inputProtection();
                 password = input;
                 hidePassword();
                 bot = new AIResearch(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));

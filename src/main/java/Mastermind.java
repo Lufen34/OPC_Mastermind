@@ -21,9 +21,8 @@ public class Mastermind extends Game {
                 hidePassword();
                 break;
             case Defense:
-                Scanner sc = new Scanner(System.in);
                 System.out.print("Please select the password :");
-                String input = sc.nextLine();
+                String input = inputProtection();
                 password = input;
                 hidePassword();
                 bot = new AIMastermind(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
@@ -31,9 +30,8 @@ public class Mastermind extends Game {
             case Duel:
                 passwordGenerator();
                 hidePassword();
-                sc = new Scanner(System.in);
                 System.out.print("Please select the password :");
-                input = sc.nextLine();
+                input = inputProtection();
                 password = input;
                 hidePassword();
                 bot = new AIMastermind(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
@@ -94,7 +92,7 @@ public class Mastermind extends Game {
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Proposal : " );
                     input = inputProtection();
-                    System.out.println("Answer : " + passwordGuessInfo(input));
+                    System.out.println("Answer : " + passwordGuessInfo(input, true));
                     break;
                 case Defense:
                     if(properties.get("DevMode").contains("true"))
@@ -103,17 +101,32 @@ public class Mastermind extends Game {
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     inputAI = bot.passwordGenerator(turn, current);
                     System.out.println("AI Proposal : " + inputAI);
-                    passwordGuesserAI = passwordGuessInfo(inputAI);
+                    passwordGuesserAI = passwordGuessInfo(inputAI, false);
                     System.out.println("Answer : " + passwordGuesserAI);
                     break;
                 case Duel:
+                    if(properties.get("DevMode").contains("true"))
+                        System.out.println("(Secret combination: " + passwordAI + ')');
+                    else
+                        System.out.println("(Secret combination : " + passwordHidden + ')');
+                    System.out.print("Proposal : " );
+                    input = inputProtection();
+                    System.out.println("Answer : " + passwordGuessInfo(input, true));
+                    if(properties.get("DevMode").contains("true"))
+                        System.out.println("(Secret combination: " + password + ')');
+                    else
+                        System.out.println("(Secret combination : " + passwordHidden + ')');
+                    inputAI = bot.passwordGenerator(turn, current);
+                    System.out.println("AI Proposal : " + inputAI);
+                    passwordGuesserAI = passwordGuessInfo(inputAI, false);
+                    System.out.println("Answer : " + passwordGuesserAI);
                     break;
             }
             turn++;
         }
     }
 
-    private String passwordGuessInfo(String input)
+    private String passwordGuessInfo(String input, boolean player)
     {
         int correctPosition = 0;
         int wrongPosition = 0;
@@ -166,6 +179,44 @@ public class Mastermind extends Game {
                 }
                 break;
             case Duel:
+                if (player == true){
+                    for (int i = 0; i < input.length(); i++) {
+                        if (input.toCharArray()[i] == passwordAI.toCharArray()[i]) {
+                            correctPosition++;
+                        }
+                        else{
+                            posMemory[j] = i;
+                            j++;
+                        }
+                    }
+                    for (int i = 0; i < posMemory.length; i++) {
+                        for (int k = 0; k < input.length(); k++) {
+                            if(input.toCharArray()[posMemory[i]] == passwordAI.toCharArray()[k]){
+                                wrongPosition++;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else{
+                    for (int i = 0; i < input.length(); i++) {
+                        if (input.toCharArray()[i] == password.toCharArray()[i]) {
+                            correctPosition++;
+                        }
+                        else{
+                            posMemory[j] = i;
+                            j++;
+                        }
+                    }
+                    for (int i = 0; i < posMemory.length; i++) {
+                        for (int k = 0; k < input.length(); k++) {
+                            if(input.toCharArray()[posMemory[i]] == password.toCharArray()[k]){
+                                wrongPosition++;
+                                break;
+                            }
+                        }
+                    }
+                }
                 break;
         }
         return  ((wrongPosition - correctPosition) < 0) ? "0":wrongPosition - correctPosition + " are present(s), " + correctPosition + " are correctly placed.";
