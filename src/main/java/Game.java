@@ -1,8 +1,5 @@
 package main.java;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -89,9 +86,7 @@ public abstract class Game implements IGameLogic{
                 }
             }
         }catch (IOException e){
-            Logger logger = Logger.getLogger(Program.class);
-            BasicConfigurator.configure();
-            logger.info("Test", e);
+            System.err.println("Unable to find " + file);
         }
     }
 

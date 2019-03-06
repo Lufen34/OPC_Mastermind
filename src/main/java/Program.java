@@ -12,7 +12,6 @@ public class Program {
      */
     private void init()
     {
-        // Exception Char / string
         float input = 0.f;
         Scanner sc = new Scanner(System.in).useLocale(Locale.US);
         System.out.println("Welcome to my project. Please select a game :");

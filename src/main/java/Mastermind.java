@@ -1,7 +1,5 @@
 package main.java;
 
-import java.util.Scanner;
-
 public class Mastermind extends Game {
 
     public Mastermind(GamePlayed game) {
