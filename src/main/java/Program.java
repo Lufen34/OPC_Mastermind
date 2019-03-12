@@ -1,12 +1,16 @@
 package main.java;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Locale;
 import java.util.Scanner;
 
 
+
 public class Program {
     private Game game;
-
+    private static final Logger LOGGER = LogManager.getLogger(Program.class);
     /**
      * Allow the user to choose the game he wants to play
      */
@@ -25,6 +29,7 @@ public class Program {
                 input = Float.parseFloat(sc.nextLine());
             }catch (Exception e)
             {
+                LOGGER.warn("Please enter a Integer");
                 System.err.println("Please enter a Integer.");
             }
         }

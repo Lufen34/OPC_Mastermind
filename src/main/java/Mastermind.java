@@ -116,7 +116,8 @@ public class Mastermind extends Game {
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     inputAI = bot.passwordGenerator(turn, current);
                     System.out.println("AI Proposal : " + inputAI);
-                    System.out.println("Answer : " + passwordGuessInfo(inputAI, false));
+                    passwordGuesserAI = passwordGuessInfo(inputAI, false);
+                    System.out.println("Answer : " + passwordGuesserAI);
                     break;
             }
             turn++;
