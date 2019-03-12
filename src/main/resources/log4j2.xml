@@ -11,25 +11,25 @@
                 </pattern>
             </PatternLayout>
             <Policies>
-                <OnStartupTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10 MB" />
-                <TimeBasedTriggeringPolicy />
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+                <TimeBasedTriggeringPolicy/>
             </Policies>
-            <DefaultRolloverStrategy max="5" />
+            <DefaultRolloverStrategy max="5"/>
         </RollingFile>
 
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout
-                    pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+                    pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>
         <Logger name="main.java" level="debug" additivity="true">
-            <appender-ref ref="fileLogger" level="info" />
+            <appender-ref ref="fileLogger" level="info"/>
         </Logger>
         <Root level="info" additivity="false">
-            <appender-ref ref="fileLogger" />
-            <appender-ref ref="console" />
+            <appender-ref ref="fileLogger"/>
+            <appender-ref ref="console"/>
         </Root>
     </Loggers>
 </Configuration>

@@ -1,5 +1,8 @@
 package main.java;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,11 +11,12 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public abstract class Game implements IGameLogic{
+public abstract class Game implements IGameLogic {
+    protected static final Logger LOGGER = LogManager.getLogger(Game.class);
     protected GameMode gamemode;
-    protected String password ="";
-    protected String passwordHidden="";
-    protected String passwordGuesser="";
+    protected String password = "";
+    protected String passwordHidden = "";
+    protected String passwordGuesser = "";
     protected List<String> config;
     protected Map<String, String> properties;
     protected boolean run;
@@ -27,8 +31,7 @@ public abstract class Game implements IGameLogic{
     protected GamePlayed current;
 
 
-    public Game(GamePlayed game)
-    {
+    public Game(GamePlayed game) {
         properties = new HashMap<>();
         run = true;
         this.current = game;
@@ -36,12 +39,12 @@ public abstract class Game implements IGameLogic{
 
     /**
      * Return the whole text before the char at position marker
-     * @param text the content that you want to extract from
+     *
+     * @param text   the content that you want to extract from
      * @param marker the position of the char
      * @return
      */
-    private String getPrefix(String text, int marker)
-    {
+    private String getPrefix(String text, int marker) {
         char[] key = new char[marker];
         for (int i = 0; i < marker; i++) {
             key[i] = text.charAt(i);
@@ -51,42 +54,40 @@ public abstract class Game implements IGameLogic{
 
     /**
      * Return the whole text after the char at position marker
-     * @param text the content that you want to extract from
+     *
+     * @param text   the content that you want to extract from
      * @param marker the position of the char
      * @return
      */
-    private String getSuffix(String text, int marker)
-    {
-        char[] key = new char[text.length() - marker -1];
+    private String getSuffix(String text, int marker) {
+        char[] key = new char[text.length() - marker - 1];
 
         for (int i = 1; i < text.length() - marker; i++) {
-            key[i-1] = text.charAt(marker+i);
+            key[i - 1] = text.charAt(marker + i);
         }
         return new String(key);
     }
 
     /**
      * Get the game configuration from the file specified
+     *
      * @param file the file you need to read
      */
-    protected void getConfig(String file)
-    {
+    protected void getConfig(String file) {
         Path path = Paths.get(file);
 
         try {
             config = Files.readAllLines(path);
 
-            for (String content:config)
-            {
-                if(content.contains("="))
-                {
-                    String prefix=getPrefix(content, content.indexOf("="));
-                    String suffix=getSuffix(content, content.indexOf("="));
+            for (String content : config) {
+                if (content.contains("=")) {
+                    String prefix = getPrefix(content, content.indexOf("="));
+                    String suffix = getSuffix(content, content.indexOf("="));
                     properties.put(prefix, suffix);
                 }
             }
-        }catch (IOException e){
-            System.err.println("Unable to find " + file);
+        } catch (IOException e) {
+            LOGGER.error("Unable to find " + file);
         }
     }
 
@@ -96,24 +97,21 @@ public abstract class Game implements IGameLogic{
      */
     @Override
     public void init() {
-        // Exception Char / string
         float input = 0.f;
         Scanner sc = new Scanner(System.in).useLocale(Locale.US);
         System.out.println("Please select a mode :");
         System.out.println("1. Challenger\n" +
-                "2. Defense\n"+
+                "2. Defense\n" +
                 "3. Duel");
-        while (input >= 4 || input <= 0)
-        {
+        while (input >= 4 || input <= 0) {
             System.out.println("Choose between 1, 2 or 3.");
-            try{
+            try {
                 input = Float.parseFloat(sc.nextLine());
-            }catch (Exception e)
-            {
-                System.err.println("Please enter a Integer.");
+            } catch (Exception e) {
+                LOGGER.error("Please enter a Integer");
             }
         }
-        switch ((int)input) {
+        switch ((int) input) {
             case 1:
                 System.out.println("You choosed the Challenger game.");
                 gamemode = GameMode.Challenger;
@@ -138,8 +136,7 @@ public abstract class Game implements IGameLogic{
     /**
      * Generate a password depending the amount of of combinations allowed from the config file.
      */
-    protected void passwordGenerator()
-    {
+    protected void passwordGenerator() {
         char[] psw = new char[Integer.parseInt(properties.get("combinations"))];
 
         for (int i = 0; i < Integer.parseInt(properties.get("combinations")); i++) {
@@ -154,8 +151,7 @@ public abstract class Game implements IGameLogic{
     /**
      * Hide the password from the user
      */
-    protected void hidePassword()
-    {
+    protected void hidePassword() {
         char[] psw = passwordAI.toCharArray();
         for (int i = 0; i < passwordAI.length(); i++) {
             psw[i] = '*';
@@ -166,25 +162,21 @@ public abstract class Game implements IGameLogic{
     /**
      * Ask the user if he want's to continue playing or not
      */
-    protected void AskRetry()
-    {
+    protected void AskRetry() {
         Scanner sc = new Scanner(System.in);
         float in = 0.f;
         System.out.println("Do you want to play again ?\n" +
-                "1. Yes\n"+
+                "1. Yes\n" +
                 "2. No");
-        while (in >= 3 || in <= 0)
-        {
+        while (in >= 3 || in <= 0) {
             System.out.println("Choose between 1 or 2.");
-            try{
+            try {
                 in = Float.parseFloat(sc.nextLine());
-            }catch (Exception e)
-            {
-                System.err.println("Please enter a Integer.");
+            } catch (Exception e) {
+                LOGGER.error("Please enter a Integer");
             }
         }
-        switch ((int)in)
-        {
+        switch ((int) in) {
             case 1:
                 init();
                 break;
@@ -197,25 +189,22 @@ public abstract class Game implements IGameLogic{
     /**
      * Test the input of the user in order to detect if he use no letter and the right amount of digits as configured
      * in the properties file.
+     *
      * @return
      */
 
-    private boolean isTheRightAmount(String input)
-    {
-        if (input.length() < Integer.parseInt(properties.get("combinations")) || input.length() > Integer.parseInt(properties.get("combinations")))
-        {
-            System.err.println("Please enter a number with " + Integer.parseInt(properties.get("combinations")) + " digits");
+    private boolean isTheRightAmount(String input) {
+        if (input.length() < Integer.parseInt(properties.get("combinations")) || input.length() > Integer.parseInt(properties.get("combinations"))) {
+            LOGGER.error("Please enter a number with " + Integer.parseInt(properties.get("combinations")) + " digits");
             return false;
-        }
-        else
+        } else
             return true;
     }
 
-    private boolean isOnlyNumbers(String input)
-    {
+    private boolean isOnlyNumbers(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (input.toCharArray()[i] < '0' || input.toCharArray()[i] > '9') {
-                System.err.println("Please enter only integers.");
+                LOGGER.error("Please enter only Integers");
                 return false;
             }
         }

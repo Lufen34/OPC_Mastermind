@@ -7,12 +7,11 @@ public class AIMastermind extends ArtificialIntelligence {
         super(numberOfAttempts, numberOfCombinations, numberMin, numberMax);
     }
 
-    public String passwordGenerator(int turn, GamePlayed game)
-    {
+    public String passwordGenerator(int turn, GamePlayed game) {
         char[] psw = new char[this.numberOfCombinations];
 
         for (int j = 0; j < this.numberOfCombinations; j++) {
-            int random = ThreadLocalRandom.current().nextInt(0, 9+1);
+            int random = ThreadLocalRandom.current().nextInt(0, 9 + 1);
             psw[j] = String.valueOf(random).toCharArray()[0];
         }
         guess = new String(psw);

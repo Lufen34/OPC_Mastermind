@@ -7,33 +7,29 @@ import java.util.Locale;
 import java.util.Scanner;
 
 
-
 public class Program {
     private Game game;
     private static final Logger LOGGER = LogManager.getLogger(Program.class);
+
     /**
      * Allow the user to choose the game he wants to play
      */
-    private void init()
-    {
+    private void init() {
         float input = 0.f;
         Scanner sc = new Scanner(System.in).useLocale(Locale.US);
         System.out.println("Welcome to my project. Please select a game :");
         System.out.println("1. Research" + '\n' +
                 "2. Mastermind");
-        while (input >= 3 || input <= 0)
-        {
+        while (input >= 3 || input <= 0) {
             input = 0.f;
             System.out.println("Choose between 1 or 2.");
-            try{
+            try {
                 input = Float.parseFloat(sc.nextLine());
-            }catch (Exception e)
-            {
-                LOGGER.warn("Please enter a Integer");
-                System.err.println("Please enter a Integer.");
+            } catch (Exception e) {
+                LOGGER.error("Please enter a Integer");
             }
         }
-        switch ((int)input) {
+        switch ((int) input) {
             case 1:
                 System.out.println("You choosed the Research game.");
                 game = new Research(GamePlayed.Reasearch);
@@ -44,20 +40,18 @@ public class Program {
         }
     }
 
-    public Program()
-    {
+    public Program() {
         try {
             init();
             game.init();
-        } catch (NullPointerException e){
-            System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.err.println();
+            LOGGER.error(e.getClass().getSimpleName() + " " + e.getMessage());
         }
     }
 
-    public void run()
-    {
-        while (game.isRunning())
-        {
+    public void run() {
+        while (game.isRunning()) {
             game.update();
             game.draw();
         }

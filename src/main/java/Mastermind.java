@@ -12,8 +12,7 @@ public class Mastermind extends Game {
         getConfig("src/main/resources/config.properties");
         minRange = Integer.parseInt(properties.get("numberMin"));
         maxRange = Integer.parseInt(properties.get("numberMax"));
-        switch(gamemode)
-        {
+        switch (gamemode) {
             case Challenger:
                 passwordGenerator();
                 hidePassword();
@@ -80,20 +79,19 @@ public class Mastermind extends Game {
 
     @Override
     public void draw() {
-        if(run == true) {
-            switch (gamemode)
-            {
+        if (run == true) {
+            switch (gamemode) {
                 case Challenger:
-                    if(properties.get("DevMode").contains("true"))
+                    if (properties.get("DevMode").contains("true"))
                         System.out.println("(Secret combination: " + passwordAI + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
-                    System.out.print("Proposal : " );
+                    System.out.print("Proposal : ");
                     input = inputProtection();
                     System.out.println("Answer : " + passwordGuessInfo(input, true));
                     break;
                 case Defense:
-                    if(properties.get("DevMode").contains("true"))
+                    if (properties.get("DevMode").contains("true"))
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
@@ -103,14 +101,14 @@ public class Mastermind extends Game {
                     System.out.println("Answer : " + passwordGuesserAI);
                     break;
                 case Duel:
-                    if(properties.get("DevMode").contains("true"))
+                    if (properties.get("DevMode").contains("true"))
                         System.out.println("(Secret combination: " + passwordAI + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
-                    System.out.print("Proposal : " );
+                    System.out.print("Proposal : ");
                     input = inputProtection();
                     System.out.println("Answer : " + passwordGuessInfo(input, true));
-                    if(properties.get("DevMode").contains("true"))
+                    if (properties.get("DevMode").contains("true"))
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
@@ -124,22 +122,19 @@ public class Mastermind extends Game {
         }
     }
 
-    private String passwordGuessInfo(String input, boolean player)
-    {
+    private String passwordGuessInfo(String input, boolean player) {
         int correctPosition = 0;
         int wrongPosition = 0;
         int[] posMemory = new int[Integer.parseInt(properties.get("combinations"))];
         int j = 0;
 
-        switch (gamemode)
-        {
+        switch (gamemode) {
             case Challenger:
                 // Detect if the number is correctly placed
                 for (int i = 0; i < input.length(); i++) {
                     if (input.toCharArray()[i] == passwordAI.toCharArray()[i]) {
                         correctPosition++;
-                    }
-                    else{
+                    } else {
                         posMemory[j] = i;
                         j++;
                     }
@@ -150,7 +145,7 @@ public class Mastermind extends Game {
                  **/
                 for (int i = 0; i < posMemory.length; i++) {
                     for (int k = 0; k < input.length(); k++) {
-                        if(input.toCharArray()[posMemory[i]] == passwordAI.toCharArray()[k]){
+                        if (input.toCharArray()[posMemory[i]] == passwordAI.toCharArray()[k]) {
                             wrongPosition++;
                             break;
                         }
@@ -161,15 +156,14 @@ public class Mastermind extends Game {
                 for (int i = 0; i < input.length(); i++) {
                     if (input.toCharArray()[i] == password.toCharArray()[i]) {
                         correctPosition++;
-                    }
-                    else{
+                    } else {
                         posMemory[j] = i;
                         j++;
                     }
                 }
                 for (int i = 0; i < posMemory.length; i++) {
                     for (int k = 0; k < input.length(); k++) {
-                        if(input.toCharArray()[posMemory[i]] == password.toCharArray()[k]){
+                        if (input.toCharArray()[posMemory[i]] == password.toCharArray()[k]) {
                             wrongPosition++;
                             break;
                         }
@@ -177,38 +171,35 @@ public class Mastermind extends Game {
                 }
                 break;
             case Duel:
-                if (player == true){
+                if (player == true) {
                     for (int i = 0; i < input.length(); i++) {
                         if (input.toCharArray()[i] == passwordAI.toCharArray()[i]) {
                             correctPosition++;
-                        }
-                        else{
+                        } else {
                             posMemory[j] = i;
                             j++;
                         }
                     }
                     for (int i = 0; i < posMemory.length; i++) {
                         for (int k = 0; k < input.length(); k++) {
-                            if(input.toCharArray()[posMemory[i]] == passwordAI.toCharArray()[k]){
+                            if (input.toCharArray()[posMemory[i]] == passwordAI.toCharArray()[k]) {
                                 wrongPosition++;
                                 break;
                             }
                         }
                     }
-                }
-                else{
+                } else {
                     for (int i = 0; i < input.length(); i++) {
                         if (input.toCharArray()[i] == password.toCharArray()[i]) {
                             correctPosition++;
-                        }
-                        else{
+                        } else {
                             posMemory[j] = i;
                             j++;
                         }
                     }
                     for (int i = 0; i < posMemory.length; i++) {
                         for (int k = 0; k < input.length(); k++) {
-                            if(input.toCharArray()[posMemory[i]] == password.toCharArray()[k]){
+                            if (input.toCharArray()[posMemory[i]] == password.toCharArray()[k]) {
                                 wrongPosition++;
                                 break;
                             }
@@ -217,6 +208,6 @@ public class Mastermind extends Game {
                 }
                 break;
         }
-        return  ((wrongPosition - correctPosition) < 0) ? "0":wrongPosition - correctPosition + " are present(s), " + correctPosition + " are correctly placed.";
+        return ((wrongPosition - correctPosition) < 0) ? "0" : wrongPosition - correctPosition + " are present(s), " + correctPosition + " are correctly placed.";
     }
 }
