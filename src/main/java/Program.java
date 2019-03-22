@@ -31,7 +31,7 @@ public class Program {
         }
         switch ((int) input) {
             case 1:
-                System.out.println("You choosed the Research game.");
+                System.out.println("You chose the Research game.");
                 game = new Research(GamePlayed.Reasearch);
                 break;
             case 2:
