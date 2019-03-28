@@ -2,8 +2,8 @@ package main.java;
 
 public class Mastermind extends Game {
 
-    public Mastermind(GamePlayed game) {
-        super(game);
+    public Mastermind(GamePlayed game, boolean devmode) {
+        super(game, devmode);
     }
 
     @Override
@@ -15,22 +15,22 @@ public class Mastermind extends Game {
         switch (gamemode) {
             case Challenger:
                 passwordGenerator();
-                hidePassword();
+                passwordHidden = hidePassword(passwordAI);
                 break;
             case Defense:
                 System.out.print("Please select the password :");
                 String input = inputProtection();
                 password = input;
-                hidePassword();
+                passwordHidden = hidePassword(password);
                 bot = new AIMastermind(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
             case Duel:
                 passwordGenerator();
-                hidePassword();
+                passwordHidden = hidePassword(passwordAI);
                 System.out.print("Please select the password :");
                 input = inputProtection();
                 password = input;
-                hidePassword();
+                passwordHidden = hidePassword(password);
                 bot = new AIMastermind(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
         }
@@ -82,7 +82,7 @@ public class Mastermind extends Game {
         if (run == true) {
             switch (gamemode) {
                 case Challenger:
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + passwordAI + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
@@ -91,7 +91,7 @@ public class Mastermind extends Game {
                     System.out.println("Answer : " + passwordGuessInfo(input, true));
                     break;
                 case Defense:
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
@@ -101,14 +101,14 @@ public class Mastermind extends Game {
                     System.out.println("Answer : " + passwordGuesserAI);
                     break;
                 case Duel:
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + passwordAI + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
                     System.out.print("Proposal : ");
                     input = inputProtection();
                     System.out.println("Answer : " + passwordGuessInfo(input, true));
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');

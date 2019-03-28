@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Program {
     private Game game;
+    private boolean devmode;
     private static final Logger LOGGER = LogManager.getLogger(Program.class);
 
     /**
@@ -32,15 +33,16 @@ public class Program {
         switch ((int) input) {
             case 1:
                 System.out.println("You chose the Research game.");
-                game = new Research(GamePlayed.Reasearch);
+                game = new Research(GamePlayed.Reasearch, devmode);
                 break;
             case 2:
-                game = new Mastermind(GamePlayed.Mastermind);
+                game = new Mastermind(GamePlayed.Mastermind, devmode);
                 break;
         }
     }
 
-    public Program() {
+    public Program(boolean devmode) {
+        this.devmode = devmode;
         try {
             init();
             game.init();

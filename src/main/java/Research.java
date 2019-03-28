@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Research extends Game {
 
-    public Research(GamePlayed game) {
-        super(game);
+    public Research(GamePlayed game, boolean devmode) {
+        super(game, devmode);
     }
 
     /**
@@ -18,22 +18,22 @@ public class Research extends Game {
         switch (gamemode) {
             case Challenger:
                 passwordGenerator();
-                hidePassword();
+                passwordHidden = hidePassword(passwordAI);
                 break;
             case Defense:
                 System.out.print("Please select the password :");
                 input = inputProtection();
                 password = input;
-                hidePassword();
+                passwordHidden = hidePassword(password);
                 bot = new AIResearch(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
             case Duel:
                 passwordGenerator();
-                hidePassword();
+                passwordHidden = hidePassword(passwordAI);
                 System.out.print("Please select the password :");
                 input = inputProtection();
                 password = input;
-                hidePassword();
+                passwordHidden = hidePassword(password);
                 bot = new AIResearch(properties.get("numberOfAttempts"), properties.get("combinations"), properties.get("numberMin"), properties.get("numberMax"));
                 break;
         }
@@ -93,7 +93,7 @@ public class Research extends Game {
         if (run == true) {
             switch (gamemode) {
                 case Challenger:
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + passwordAI + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
@@ -103,7 +103,7 @@ public class Research extends Game {
                     System.out.println("Answer : " + passwordGuesser);
                     break;
                 case Defense:
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
@@ -114,7 +114,7 @@ public class Research extends Game {
                     bot.getInformation(passwordGuesserAI);
                     break;
                 case Duel:
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + passwordAI + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');
@@ -122,7 +122,7 @@ public class Research extends Game {
                     input = inputProtection();
                     passwordGuesser = guessPasswordInfo(input, true);
                     System.out.println("Answer : " + passwordGuesser);
-                    if (properties.get("DevMode").contains("true"))
+                    if (devmode == true)
                         System.out.println("(Secret combination: " + password + ')');
                     else
                         System.out.println("(Secret combination : " + passwordHidden + ')');

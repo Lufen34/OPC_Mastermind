@@ -29,12 +29,14 @@ public abstract class Game implements IGameLogic {
     protected int minRange = 0;
     protected int maxRange = 9;
     protected GamePlayed current;
+    protected boolean devmode;
 
 
-    public Game(GamePlayed game) {
+    public Game(GamePlayed game, boolean devmode) {
         properties = new HashMap<>();
         run = true;
         this.current = game;
+        this.devmode = devmode;
     }
 
     /**
@@ -151,12 +153,12 @@ public abstract class Game implements IGameLogic {
     /**
      * Hide the password from the user
      */
-    protected void hidePassword() {
-        char[] psw = passwordAI.toCharArray();
-        for (int i = 0; i < passwordAI.length(); i++) {
+    protected String hidePassword(String input) {
+        char[] psw = input.toCharArray();
+        for (int i = 0; i < input.length(); i++) {
             psw[i] = '*';
         }
-        passwordHidden = new String(psw);
+        return new String(psw);
     }
 
     /**
