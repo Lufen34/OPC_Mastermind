@@ -15,6 +15,8 @@ public class Research extends Game {
     public void init() {
         super.init();
         getConfig("src/main/resources/config.properties");
+        if(devmode == false && properties.get("devmode").toLowerCase().equals("true"))
+            devmode = true;
         switch (gamemode) {
             case Challenger:
                 passwordGenerator();

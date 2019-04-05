@@ -12,6 +12,8 @@ public class Mastermind extends Game {
         getConfig("src/main/resources/config.properties");
         minRange = Integer.parseInt(properties.get("numberMin"));
         maxRange = Integer.parseInt(properties.get("numberMax"));
+        if(devmode == false && properties.get("devmode").toLowerCase().equals("true"))
+            devmode = true;
         switch (gamemode) {
             case Challenger:
                 passwordGenerator();
